@@ -34,8 +34,25 @@ Route::any('/products', [App\Http\Controllers\Admin\ProductController::class, 'i
 Route::any('/product/save', [App\Http\Controllers\Admin\ProductController::class, 'productSave'])->name('products.save');
 Route::any('/product/edit', [App\Http\Controllers\Admin\ProductController::class, 'productEdit'])->name('products.edit');
 Route::any('/product/delete', [App\Http\Controllers\Admin\ProductController::class, 'productDelete'])->name('products.delete');
-Route::any('/products/description/{id?}', [App\Http\Controllers\Admin\ProductController::class, 'productDescription'])->name('products.description');
 
+
+
+// Products Details
+Route::any('/products/details/{id?}', [App\Http\Controllers\Admin\ProductController::class, 'productDetail'])->name('products.details');
+Route::any('/save/products/details', [App\Http\Controllers\Admin\ProductController::class, 'productDetailSave'])->name('products.description');
+Route::any('/edit/products/details', [App\Http\Controllers\Admin\ProductController::class, 'productDetailsEdit'])->name('products.detailsedit');
+Route::any('/delete/products/details', [App\Http\Controllers\Admin\ProductController::class, 'productDetailsDelete'])->name('products.detailsdel');
+
+// Product Description
+Route::any('/save/products/description', [App\Http\Controllers\Admin\ProductController::class, 'productDescriptionSave'])->name('products.descriptionsave');
+
+// Product Technology Details
+Route::any('/save/products/technology', [App\Http\Controllers\Admin\ProductController::class, 'technologySave'])->name('products.technologysave');
+
+
+// Product Sub Technology Details
+Route::any('/subtechnology/save', [App\Http\Controllers\Admin\ProductController::class, 'subTechnologySave'])->name('products.subtechnologysave');
+Route::any('/save/products/addon', [App\Http\Controllers\Admin\ProductController::class, 'subTechnologySave'])->name('products.addonsave');
 
 // Sub-Products
 Route::any('/subproducts', [App\Http\Controllers\Admin\SubProductController::class, 'index'])->name('subproducts');

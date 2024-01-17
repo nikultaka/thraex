@@ -46,14 +46,16 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js" defer>
     </script>
     <!-- Page CSS -->
-
+    
     <!-- Helpers -->
     <script src="{{ asset('assets/theme/vendor/js/helpers.js') }}"></script>
-
+    
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('assets/theme/js/config.js') }}"></script>
-  
+      <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+      <script src="{{ asset('assets/theme/js/config.js') }}"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('admin-header')
 
   </head>
@@ -73,6 +75,9 @@
             <!-- Content -->
 
             @yield('admin-content')
+          
+            {{-- @include('admin.layouts.footer') --}}
+
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -83,7 +88,10 @@
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
+
     </div>
+
+    
     <!-- / Layout wrapper -->
 
     {{-- <div class="buy-now">
@@ -101,6 +109,19 @@
 
     <script type="text/javascript">
       var BASE_URL = "{{ url('/') }}";
+
+      const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                          toast.onmouseenter = Swal.stopTimer;
+                          toast.onmouseleave = Swal.resumeTimer;
+                        }
+                      });
+
 </script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -139,6 +160,8 @@
     <script src="{{ asset('assets/theme/js/dashboards-analytics.js') }}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
+  
+
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>

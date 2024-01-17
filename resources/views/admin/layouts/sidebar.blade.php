@@ -1,5 +1,12 @@
 @php
  $currentRouteName = \Route::currentRouteName();
+
+//  $list = \Route::getRoutes()->getRoutes();
+
+// foreach ($list as $route) {
+//     echo $route->uri() . " (" . $route->getName() . ")<br>";
+// }
+// die;
 @endphp
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">

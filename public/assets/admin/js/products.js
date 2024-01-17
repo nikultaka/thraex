@@ -28,6 +28,11 @@ $(document).ready(function(){
                     var data = JSON.parse(response);
                     if(data.status == 1){
                     // alert(data.msg)
+                    Swal.fire({
+                        title: "Good job!",
+                        text: data.msg,
+                        icon: "success"
+                      });
                     $('#productsModal').modal('hide');
                     productList();
 
@@ -74,6 +79,17 @@ $(document).on('click','#productEdit',function(){
 
 $(document).on('click','#productDelete',function(){
     var deleteId = $(this).data("id");
+
+    Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+                
     $.ajax({
         type: "post",
         url: BASE_URL +"/product/delete",
@@ -85,15 +101,22 @@ $(document).on('click','#productDelete',function(){
             var data = JSON.parse(response);
             
             if(data.status == 1){
-                alert(data.msg)
+                // alert()
+                Swal.fire(data.msg, "", "success");
                 productList();
 
             }else{
-
+                Swal.fire(data.msg, "", "info");
             }
            
         },
     });
+          
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+  
 });
 
 

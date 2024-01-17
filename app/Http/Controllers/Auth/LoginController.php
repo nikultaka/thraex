@@ -39,6 +39,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        // $this->middleware('admin')->except('logout');
+
+
     }
 
     public function login(Request $request){
@@ -55,10 +58,11 @@ class LoginController extends Controller
                 'email'                 => 'required|email',
                 'password'              => 'required|min:8|max:20|regex:/^[A-Za-z0-9 ]+$/|alpha_dash',
             ]);
-            $credentials = $request->only('email', 'password');
-            $credentials['status'] = 1;
 
-            if (auth()->attempt(['email' => $post['email'], 'password' => $post['password']])) {
+            $credentials = $request->only('email', 'password');
+            // $credentials['status'] = 1;
+
+            if (auth()->attempt($credentials)) {
                 return redirect()->route('admin.home');
             } else {
                 return redirect()->route('login')->with('error', 'Email-Address and Password are wrong.');

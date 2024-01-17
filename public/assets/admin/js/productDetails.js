@@ -148,20 +148,56 @@ $('form[id="technologySubForm"]').validate({
 });
 
 
-// Save Addon details
-$('form[id="addonForm"]').validate({
+// // Save Addon details
+// $('form[id="addonForm"]').validate({
+//     rules: {
+//         addontitle: "required",
+//         addOndescription: "required",
+//     },
+//     messages: {
+//         addontitle: "title is required.",
+//         addOndescription: "description is required.",
+//     },
+//     submitHandler: function() {
+//         var formData = new FormData($("#addonForm")[0]);
+//         $.ajax({
+//             url: BASE_URL + '/save/products/addon',
+//             type: 'POST',
+//             data: formData,
+//             processData: false,
+//             contentType: false,
+//             cache: false,
+//             success: function (response) {
+//                 var data = JSON.parse(response);
+//                if(data.status == 1){
+
+//                 $("#addonForm")[0].reset();
+//                 $("#hid").val("");
+//                 $("#addonForm").validate().resetForm();
+//                 $("#addonForm").find('.error').removeClass('error');
+//                 alert(data.msg)
+//             }else{
+//                 alert(data.msg)
+//                }
+//             }
+//         });
+//     }
+// });
+
+
+$('form[id="materialForm"]').validate({
     rules: {
-        addontitle: "required",
-        addOndescription: "required",
+        materialtitle: "required",
+        materialdescription: "required",
     },
     messages: {
-        addontitle: "title is required.",
-        addOndescription: "description is required.",
+        materialtitle: "title is required.",
+        materialdescription: "description is required.",
     },
     submitHandler: function() {
-        var formData = new FormData($("#addonForm")[0]);
+        var formData = new FormData($("#materialForm")[0]);
         $.ajax({
-            url: BASE_URL + '/save/products/addon',
+            url: BASE_URL + '/save/products/material',
             type: 'POST',
             data: formData,
             processData: false,
@@ -169,15 +205,14 @@ $('form[id="addonForm"]').validate({
             cache: false,
             success: function (response) {
                 var data = JSON.parse(response);
-            //    console.log(data);
+                console.log(data);
+                
                if(data.status == 1){
-
-                $("#addonForm")[0].reset();
+                $("#materialForm")[0].reset();
                 $("#hid").val("");
-                $("#addonForm").validate().resetForm();
-                $("#addonForm").find('.error').removeClass('error');
+                $("#materialForm").validate().resetForm();
+                $("#materialForm").find('.error').removeClass('error');
                 alert(data.msg)
-              
             }else{
                 alert(data.msg)
                }

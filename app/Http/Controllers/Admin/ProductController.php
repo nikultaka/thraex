@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddOns;
+use App\Models\Materials;
 use App\Models\ProductDescription;
 use App\Models\ProductDetails;
 use App\Models\Products;
@@ -475,6 +477,9 @@ class ProductController extends Controller
                 $response['msg'] = "Product Technology Details Saved Successfully.";
             }
         }
+        
+        echo json_encode($response);
+        exit();
     }
 
     public function subTechnologySave(Request $request){
@@ -520,7 +525,105 @@ class ProductController extends Controller
         exit();
     }
 
+  
+
     public function addOnSave(Request $request){
         $post = $request->all();
+
+        $currentURL = url()->previous();
+        $productId = basename($currentURL);
+
+        $response = array();
+        $response['status'] = 0;
+        $response['msg'] = "Something went wrong please try again.";
+
+        $imageName = '';
+
+        if (!isset($post['hid']) && $post['hid'] == '') {
+
+            if ($request->hasFile('addonImg')) {
+
+                $extension = $request->file('addonImg')->getClientOriginalExtension();
+                $imageName = time() . '.' . $extension;
+
+                $uploadDirectory = 'uploads';
+
+                $uploadPath = public_path($uploadDirectory);
+
+                if (!File::exists($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true, true);
+                }
+
+                $request->file('addonImg')->move($uploadPath, $imageName);
+                $imagePath = $uploadDirectory . '/' . $imageName;
+            }
+
+            $insertaddOnDetails = new AddOns;
+            $insertaddOnDetails->title = isset($post['addontitle']) ? $post['addontitle'] : '';
+            $insertaddOnDetails->addon_img = isset($imageName) ? $imageName : '';
+            $insertaddOnDetails->addon_description = isset($post['addOndescription']) ? $post['addOndescription'] : '';
+            $insertaddOnDetails->product_id = isset($productId) ? $productId : '';
+            $insertaddOnDetails->created_at = Carbon::now();
+            $insertaddOnDetails->save();
+
+            if ($insertaddOnDetails->id) {
+                $response['status'] = 1;
+                $response['msg'] = "Add-Ons Details Saved Successfully.";
+            }
+        }
+        
+        echo json_encode($response);
+        exit();
+    }
+
+
+    public function materialSave(Request $request){
+
+        $post = $request->all();
+ 
+        $currentURL = url()->previous();
+        $productId = basename($currentURL);
+
+        $response = array();
+        $response['status'] = 0;
+        $response['msg'] = "Something went wrong please try again.";
+
+        $imageName = '';
+
+        if (!isset($post['hid']) && $post['hid'] == '') {
+
+            if ($request->hasFile('materialImg')) {
+
+                $extension = $request->file('materialImg')->getClientOriginalExtension();
+                $imageName = time() . '.' . $extension;
+
+                $uploadDirectory = 'uploads';
+
+                $uploadPath = public_path($uploadDirectory);
+
+                if (!File::exists($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true, true);
+                }
+
+                $request->file('materialImg')->move($uploadPath, $imageName);
+                $imagePath = $uploadDirectory . '/' . $imageName;
+            }
+
+            $insertMaterialDetails = new Materials;
+            $insertMaterialDetails->title = isset($post['materialtitle']) ? $post['materialtitle'] : '';
+            $insertMaterialDetails->material_img = isset($imageName) ? $imageName : '';
+            $insertMaterialDetails->material_description = isset($post['materialdescription']) ? $post['materialdescription'] : '';
+            $insertMaterialDetails->product_id = isset($productId) ? $productId : '';
+            $insertMaterialDetails->created_at = Carbon::now();
+            $insertMaterialDetails->save();
+
+            if ($insertMaterialDetails->id) {
+                $response['status'] = 1;
+                $response['msg'] = "Material Details Saved Successfully.";
+            }
+        }
+
+        echo json_encode($response);
+        exit();
     }
 }

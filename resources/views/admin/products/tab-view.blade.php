@@ -39,12 +39,12 @@
                     data-bs-toggle="list"
                     href="#list-settings">Technology(Sub-part)
                     </a>
-                  <a
+                  {{-- <a
                     class="list-group-item list-group-item-action"
                     id="list-addon-list"
                     data-bs-toggle="list"
                     href="#list-addon">Add-Ons
-                    </a>
+                    </a> --}}
                   <a
                     class="list-group-item list-group-item-action"
                     id="list-material-list"

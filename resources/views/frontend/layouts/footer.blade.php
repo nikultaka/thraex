@@ -1,4 +1,4 @@
-<footer class="ftco-footer">
+<footer class="ftco-footer mt-4">
     <div class="container mb-5 pb-4">
         <div class="row">
             <div class="col-lg col-md-6">

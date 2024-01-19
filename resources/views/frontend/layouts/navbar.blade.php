@@ -1,3 +1,14 @@
+@php
+ $currentRouteName = \Route::currentRouteName();
+
+//  $list = \Route::getRoutes()->getRoutes();
+
+// foreach ($list as $route) {
+//     echo $route->uri() . " (" . $route->getName() . ")<br>";
+// }
+// die;
+@endphp
+
 <div class="py-1 top">
     <div class="container">
         <div class="row">
@@ -153,17 +164,7 @@
         </div>
     </div>
 </nav> --}}
-{{-- @php
-echo '<pre>';
-print_r($products);
-die;
-@endphp --}}
 
-{{-- @php
-echo '<pre>';
-print_r($groupedProducts);
-die;
-@endphp --}}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Brand</a>
@@ -173,8 +174,10 @@ die;
         </button>
         <div class="collapse navbar-collapse" id="main_nav">
             <ul class="navbar-nav">
-                <li class="nav-item active"> <a class="nav-link" href="{{ route('front.home') }}">Home </a> </li>
-                <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
+                <li class="nav-item {{ $currentRouteName == "front.home" ? 'active' : ''  }}"> 
+                    <a class="nav-link" href="{{ route('front.home') }}">Home </a> </li>
+                <li class="nav-item {{ $currentRouteName == "about" ? 'active' : ''  }}">
+                    <a class="nav-link" href="{{  route('about') }}"> About </a></li>
                 <li class="nav-item dropdown" id="myDropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Category </a>
                     <ul class="dropdown-menu">
@@ -187,8 +190,9 @@ die;
                                         <ul class="submenu dropdown-menu">
                                             @foreach ($groupedProductsData['subproducts'] as $subProductKey => $subProductData)
                                                 <li><a class="dropdown-item"
-                                                        href="#">{{ $subProductData['subproduct_name'] }}</a></li>
+                                                        href="{{ route('details', ['id' => encrypt($subProductData['sub_products_id'])]) }}">{{ $subProductData['subproduct_name'] }}</a></li>
                                             @endforeach
+                                            
                                         </ul>
                                     @endif
                                 </li>
@@ -216,6 +220,9 @@ die;
 
             </ul>
             </li>
+            <li class="nav-item {{ $currentRouteName == "contact" ? 'active' : ''  }}"><a class="nav-link"
+                 href="{{  route('contact') }}"> Contact </a></li>
+
             </ul>
         </div>
     </div>

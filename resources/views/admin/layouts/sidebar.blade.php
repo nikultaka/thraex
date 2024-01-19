@@ -100,6 +100,19 @@
           <div data-i18n="Basic">Sub-Products</div>
         </a>
       </li>
+    
+      <li class="menu-item {{ $currentRouteName == 'admin.about' ? 'active' : '' }}">
+        <a href="{{ route('admin.about') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <div data-i18n="Basic">About</div>
+        </a>
+      </li>
+      <li class="menu-item {{ $currentRouteName == 'admin.contacts' ? 'active' : '' }}">
+        <a href="{{ route('admin.contacts') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-collection"></i>
+          <div data-i18n="Basic">Contact</div>
+        </a>
+      </li>
 
       <!-- Layouts -->
       {{-- <li class="menu-item">

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.index')
-@section('front-title','Products')
+@section('front-title','Home')
 @section('front-content')
 
 

@@ -182,6 +182,11 @@ $('form[id="addonForm"]').validate({
 });
 
 function addOnList(){
+
+    var url = window.location.href;
+    url = url.split('/');
+    url = url[url.length - 1];
+    
     $("#addOnsTable").DataTable({
         processing: true,
         bDestroy: true,
@@ -189,7 +194,7 @@ function addOnList(){
         serverSide: true,
         ajax: {
             type: "POST",
-            url: BASE_URL + "/subproducts/addon",
+            url: BASE_URL + "/subproducts/addon/"+ url,
             data: {
                 _token: $("[name='_token']").val(),
             },

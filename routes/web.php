@@ -30,7 +30,13 @@ Route::any('/admin/logout', [App\Http\Controllers\Auth\LoginController::class, '
 
 Route::group(['middleware' => ['guest']], function () {
     Route::any('/', [App\Http\Controllers\Frontend\MainController::class, 'index'])->name('front.home');
+    
     Route::get('/get-subproducts/{productId?}', [App\Http\Controllers\Frontend\MainController::class, 'getSubproducts'])->name('get.subproducts');
+    Route::get('/about', [App\Http\Controllers\Frontend\MainController::class, 'about'])->name('about');
+
+    Route::get('/contact', [App\Http\Controllers\Frontend\MainController::class, 'contact'])->name('contact');
+    Route::any('/sendmail', [App\Http\Controllers\Frontend\MainController::class, 'sendmail'])->name('sendmail');
+    Route::any('/details/{id?}', [App\Http\Controllers\Frontend\MainController::class, 'details'])->name('details');
 
     Route::any('/products/all', [App\Http\Controllers\Frontend\ProductController::class, 'index'])->name('front.products');
     
@@ -38,7 +44,7 @@ Route::group(['middleware' => ['guest']], function () {
 
 // Admin Group
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Admin-only routes go here
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
 
 // Products
@@ -84,6 +90,11 @@ Route::any('/subproducts/delete', [App\Http\Controllers\Admin\SubProductControll
 
 Route::any('/subproducts/description', [App\Http\Controllers\Admin\SubProductController::class, 'description'])->name('subproducts.description');
 
+Route::any('/cms/contacts', [App\Http\Controllers\Admin\CmsController::class, 'contact'])->name('admin.contacts');
+Route::any('/save/contacts', [App\Http\Controllers\Admin\CmsController::class, 'contactSave'])->name('admin.contacts.save');
+
+Route::any('/cms/about', [App\Http\Controllers\Admin\CmsController::class, 'about'])->name('admin.about');
+Route::any('/save/about', [App\Http\Controllers\Admin\CmsController::class, 'saveAbout'])->name('admin.about.save');
 });
 
 

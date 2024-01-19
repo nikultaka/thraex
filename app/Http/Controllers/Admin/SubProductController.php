@@ -167,18 +167,30 @@ class SubProductController extends Controller
         // return view('');
     }
 
-    public function addOn(Request $request){
+    public function addOn($id = null,Request $request){
+        
+        $subId = $id;
+     
         if (!$request->isMethod('post')) {
 
         return view('admin.sub-products.add-ons');
-    }
+        }
 
     if ($request->ajax() && $request->isMethod('post')) {
-
-        $addOns =  AddOns::select('addons.*','sub_products.subproduct_name')
+        // rewrite this query
+     
+        $addOns = array();
+        $addOns = AddOns::select('addons.*','sub_products.subproduct_name')
         ->leftJoin('sub_products', 'addons.subproduct_id', '=', 'sub_products.id')
-        ->where('addons.status','=',1)->get();
-       
+        ->where('addons.status',1)
+        ->where('addons.subproduct_id','=', $subId)
+        ->get()->toArray();
+
+        
+        // $addOns =  AddOns::select('addons.*','sub_products.subproduct_name')
+        // ->leftJoin('sub_products', 'addons.subproduct_id', '=', 'sub_products.id')
+        // ->where('addons.subproduct_id','=', $id)
+        // ->where('addons.status','=',1)->get();
 
         return Datatables::of($addOns)
         ->addIndexColumn()

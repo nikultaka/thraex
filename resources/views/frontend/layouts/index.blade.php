@@ -62,7 +62,22 @@
                 margin-bottom: .5rem;
             }
         }
+        .blog-entry {
+        position: relative;
+        overflow: hidden;
+    }
 
+    .block-20 {
+        background-size: cover;
+        background-position: center;
+        height: 300px; /* Adjust the height based on your design */
+    }
+
+    .block-20 img {
+        width: 100%; /* Make sure the image takes 100% of the container's width */
+        height: 100%; /* Make sure the image takes 100% of the container's height */
+        object-fit: cover; /* Ensure the image covers the container while maintaining its aspect ratio */
+    }
     </style>
 </head>
 
@@ -86,7 +101,9 @@
 			</div>
 		</div>
 	</nav> --}}
+    
     @include('frontend.layouts.navbar')
+
     <!-- END nav -->
 
 
@@ -212,7 +229,9 @@
                 stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
-
+        <script type="text/javascript">
+            var BASE_URL = "{{ url('/') }}";
+            </script>
     <script src="{{ asset('assets/frontend-theme/js/jquery.min.js') }}"></script>
     <script>
         // $(document).ready(function () {
@@ -242,6 +261,10 @@
     <script src="{{ asset('assets/frontend-theme/js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('assets/frontend-theme/js/jquery.timepicker.min.js') }}"></script>
     <script src="{{ asset('assets/frontend-theme/js/scrollax.min.js') }}"></script>
+    
+    <script ript src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+    integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @yield('front-footer')
 
